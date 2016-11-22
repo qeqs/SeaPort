@@ -6,6 +6,8 @@ import model.entities.Entity;
  * Created on 22.11.2016.
  */
 public abstract class AbstractSubscriber implements Subscriber {
+	private static int ID = 0;
+	private int id;
 	protected Entity workingEntity;
 	protected int currentProgress = 0;
 	protected int weight;
@@ -20,7 +22,7 @@ public abstract class AbstractSubscriber implements Subscriber {
 		if (unloaded++ <= unloadType) {return;}//наполняем цистерны
 		unloaded = 0;
 		weight--;
-		currentProgress = 10 * (weight / (workingEntity.getValue()));
+		currentProgress = 10 * ((workingEntity.getValue() - weight) / (workingEntity.getValue()));
 	}
 
 	public int getProgress() {
@@ -30,5 +32,14 @@ public abstract class AbstractSubscriber implements Subscriber {
 	public void set(Entity entity) {
 		workingEntity = entity;
 		weight = workingEntity.getValue();
+	}
+
+	public String getName() {
+		return "" + id;
+	}
+
+	public AbstractSubscriber() {
+		ID++;
+		id = ID;
 	}
 }

@@ -7,4 +7,9 @@ public class LiquidSubscriber extends AbstractSubscriber {
 	public LiquidSubscriber() {
 		unloadType = 4;
 	}
+
+	@Override
+	public String getName() {
+		return "Liquid crane " + super.getName();
+	}
 }

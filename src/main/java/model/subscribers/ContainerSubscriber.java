@@ -7,4 +7,9 @@ public class ContainerSubscriber extends AbstractSubscriber {
 	public ContainerSubscriber() {
 		unloadType = 1;
 	}
+
+	@Override
+	public String getName() {
+		return "Container crane " + super.getName();
+	}
 }

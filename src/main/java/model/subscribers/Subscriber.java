@@ -11,4 +11,6 @@ public interface Subscriber {
 	int getProgress();
 
 	void set(Entity entity);
+
+	String getName();
 }
