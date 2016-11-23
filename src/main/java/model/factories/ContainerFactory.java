@@ -26,7 +26,7 @@ public class ContainerFactory implements Factory {
 	}
 	public ContainerEntity createEntity() {
 		random = new Random();
-		return new ContainerEntity(String.valueOf(i++), random.nextInt(4) + 5, EventProvider.getDate());
+		return new ContainerEntity("Container" + String.valueOf(i++), random.nextInt(6) + 1, EventProvider.getDate());
 	}
 
 	public ContainerEntity createEntity(String name, int weight, Date departure) {

@@ -47,7 +47,7 @@ public class EventProvider {
 	public static void onNewDay(List<Entity> entityList) {
 		totalDays++;
 		weather = getWeather();
-		currentDate.setTime(currentDate.getTime() + 1000 * 24 * 3600 * 7);
+		currentDate.setTime(currentDate.getTime() + 1000 * 24 * 3600);
 		fireSub(entityList);
 	}
 

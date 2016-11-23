@@ -13,7 +13,7 @@ import java.util.List;
  * Created on 20.11.2016.
  */
 public class Statistics implements Subscriber {
-	private int penalty;
+	private int penalty = 0;
 	private int penaltyPerDay = 2000;
 	private int goodWeatherDays;
 	private int badWeatherDays;
@@ -42,8 +42,8 @@ public class Statistics implements Subscriber {
 
 	}
 
-	public int getPercentGoodWeatherDays() {
-		return 100 * (goodWeatherDays / (badWeatherDays + goodWeatherDays));
+	public double getPercentGoodWeatherDays() {
+		return 100 * Double.valueOf(Double.valueOf(goodWeatherDays) / Double.valueOf(badWeatherDays + goodWeatherDays));
 	}
 
 	public void onNewDay(List<Entity> entityList) {
@@ -51,7 +51,7 @@ public class Statistics implements Subscriber {
 		else badWeatherDays++;
 
 		for (Entity entity : entityList) {
-			if (entity.getDate().after(EventProvider.getCurrentDate())) incrPenalty();
+			if (!entity.getDate().after(EventProvider.getCurrentDate())) incrPenalty();
 		}
 	}
 
@@ -60,7 +60,7 @@ public class Statistics implements Subscriber {
 	}
 
 	public static void setUnLoadTime(int unLoadTime) {
-		avarageUnLoadTime = avarageUnLoadTime > 0 ? (avarageUnLoadTime + unLoadTime) / 2 : unLoadTime;
+		avarageUnLoadTime = avarageUnLoadTime > 0 ? (int) (Double.valueOf(avarageUnLoadTime + unLoadTime) / 2.0) : unLoadTime;
 
 	}
 }

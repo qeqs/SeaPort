@@ -38,4 +38,9 @@ abstract class AbstractEntity implements Entity {
     public String getModel() {
         return model;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

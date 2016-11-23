@@ -24,7 +24,7 @@ public abstract class AbstractSubscriber implements Subscriber {
 		unloadsPerShip++;
 
 		if (weight == 0) {
-			entityList.add(workingEntity);
+			if (workingEntity != null) entityList.add(workingEntity);
 			workingEntity = null;
 			Statistics.setUnLoadTime(unloadsPerShip);
 			unloadsPerShip = 0;
@@ -36,7 +36,7 @@ public abstract class AbstractSubscriber implements Subscriber {
 
 		unloaded = 0;
 		weight--;
-		currentProgress = 10 * ((workingEntity.getValue() - weight) / (workingEntity.getValue()));
+		currentProgress = (int) (10 * (Double.valueOf(workingEntity.getValue() - weight) / Double.valueOf(workingEntity.getValue())));
 	}
 
 	public int getProgress() {
@@ -59,5 +59,17 @@ public abstract class AbstractSubscriber implements Subscriber {
 	public AbstractSubscriber() {
 		ID++;
 		id = ID;
+	}
+
+	@Override
+	public String toString() {
+		String entityInfo = "";
+		if (workingEntity != null) {
+			entityInfo = " (" + workingEntity.getName() + ", " + workingEntity.getDate().toString() + ", " + "weight: " + workingEntity.getValue() + ") " + getProgress();
+			for (int i = 0; i < getProgress(); i++) {
+				entityInfo += "#";
+			}
+		}
+		return getName() + entityInfo + "\n";
 	}
 }

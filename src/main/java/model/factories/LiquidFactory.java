@@ -25,7 +25,7 @@ public class LiquidFactory implements Factory {
 	}
 	public LiquidEntity createEntity() {
 		random = new Random();
-		return new LiquidEntity(String.valueOf(i++), random.nextInt(4) + 5, EventProvider.getDate());
+		return new LiquidEntity("Liquid" + String.valueOf(i++), random.nextInt(6) + 1, EventProvider.getDate());
 	}
 
 	public LiquidEntity createEntity(String name, int weight, Date departure) {

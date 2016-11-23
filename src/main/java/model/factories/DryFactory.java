@@ -25,7 +25,7 @@ public class DryFactory implements Factory {
 	}
 	public DryEntity createEntity() {
 		random = new Random();
-		return new DryEntity(String.valueOf(i++), random.nextInt(4) + 5, EventProvider.getDate());
+		return new DryEntity("Dry" + String.valueOf(i++), random.nextInt(6) + 1, EventProvider.getDate());
 	}
 
 	public DryEntity createEntity(String name, int weight, Date departure) {

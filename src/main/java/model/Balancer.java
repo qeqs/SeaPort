@@ -19,7 +19,7 @@ public class Balancer {
 
 	public LinkedList<Entity> inQueue = new LinkedList<Entity>();
 	public LinkedList<Entity> outQueue = new LinkedList<Entity>();
-	private List<Subscriber> subscriberList = new ArrayList<Subscriber>();
+	public List<Subscriber> subscriberList = new ArrayList<Subscriber>();
 	private Statistics stat = new Statistics();
 
 	public void addSub(Subscriber sub) {
@@ -34,13 +34,12 @@ public class Balancer {
 	}
 
 	private void setSub(List<Entity> entityList) {
-		List<Integer> temp = new ArrayList<Integer>();
 		for (Subscriber sub : subscriberList) {
 
 			if (((AbstractSubscriber) sub).isReady()) for (int i = 0; i < inQueue.size(); i++) {
 
 				((AbstractSubscriber) sub).set(inQueue.get(i));
-				if (((AbstractSubscriber) sub).isReady()) temp.remove(i);
+				if (!((AbstractSubscriber) sub).isReady()) inQueue.remove(i);
 			}
 		}
 	}
@@ -67,7 +66,6 @@ public class Balancer {
 	private int priority(Entity entity) {
 		return (entity.getValue() + entity.getType()) / (int) (entity.getDate().getTime() - EventProvider.getCurrentDate().getTime());
 	}
-
 	private void createNewShips() {
 		Random random = new Random();
 		switch (random.nextInt(6)) {
@@ -84,6 +82,7 @@ public class Balancer {
 				break;
 		}
 	}
+
 	public Balancer() {
 
 		subscriberList.add(ContainerFactory.getInstance().createSubscriber());
