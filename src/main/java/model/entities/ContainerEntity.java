@@ -11,7 +11,7 @@ public class ContainerEntity extends AbstractEntity {
     public static final int UNLOAD_TYPE = 1;
     public ContainerEntity(String name, int weight, Date departure) {
         super(name, weight, departure);
-        model = "<-#->";
+        model = "<-#->";//  <-getName()->
         color = ConsoleSystemInterface.RED;
     }
 
