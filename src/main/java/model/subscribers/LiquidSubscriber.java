@@ -1,11 +1,14 @@
 package model.subscribers;
 
+import model.entities.LiquidEntity;
+
 /**
  * Created on 20.11.2016.
  */
 public class LiquidSubscriber extends AbstractSubscriber {
+
 	public LiquidSubscriber() {
-		unloadType = 4;
+		unloadType = LiquidEntity.UNLOAD_TYPE;
 	}
 
 	@Override

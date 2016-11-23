@@ -13,7 +13,16 @@ import java.util.Random;
 public class DryFactory implements Factory {
 	int i = 0;
 	Random random;
+	private static DryFactory instance;
 
+	public static DryFactory getInstance() {
+		if (instance == null) instance = new DryFactory();
+		return instance;
+	}
+
+	private DryFactory() {
+
+	}
 	public DryEntity createEntity() {
 		random = new Random();
 		return new DryEntity(String.valueOf(i++), random.nextInt(4) + 5, EventProvider.getDate());

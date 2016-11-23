@@ -4,18 +4,27 @@ import model.entities.Entity;
 import model.subscribers.Subscriber;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
-/**
- * Created on 20.11.2016.
- */
-enum Weather {
-	clearSky, storm
-}
-
-public class EventProvider implements Subscriber {
+public class EventProvider {
 	private static Weather weather = Weather.clearSky;
 	private static Date currentDate = new Date(System.currentTimeMillis());
+	private static List<Subscriber> subscriberList = new ArrayList<Subscriber>();
+	private static int totalDays = 0;
+
+	public static void addSub(Subscriber sub) {
+		subscriberList.add(sub);
+	}
+
+	private static void fireSub(List<Entity> entityList) {
+		for (Subscriber sub : subscriberList) {
+
+			sub.onNewDay(entityList);
+		}
+	}
 
 	public static Date getDate() {
 		Random random = new Random();
@@ -35,20 +44,14 @@ public class EventProvider implements Subscriber {
 		return currentDate;
 	}
 
-	public void onNewDay() {
+	public static void onNewDay(List<Entity> entityList) {
+		totalDays++;
 		weather = getWeather();
 		currentDate.setTime(currentDate.getTime() + 1000 * 24 * 3600 * 7);
+		fireSub(entityList);
 	}
 
-	public int getProgress() {
-		return 0;
-	}
-
-	public void set(Entity entity) {
-
-	}
-
-	public String getName() {
-		return null;
+	public static int getTotalDays() {
+		return totalDays;
 	}
 }

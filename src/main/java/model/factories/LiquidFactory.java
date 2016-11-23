@@ -13,7 +13,16 @@ import java.util.Random;
 public class LiquidFactory implements Factory {
 	int i = 0;
 	Random random;
+	private static LiquidFactory instance;
 
+	public static LiquidFactory getInstance() {
+		if (instance == null) instance = new LiquidFactory();
+		return instance;
+	}
+
+	private LiquidFactory() {
+
+	}
 	public LiquidEntity createEntity() {
 		random = new Random();
 		return new LiquidEntity(String.valueOf(i++), random.nextInt(4) + 5, EventProvider.getDate());

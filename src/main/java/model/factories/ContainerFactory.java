@@ -14,7 +14,16 @@ import java.util.Random;
 public class ContainerFactory implements Factory {
 	int i = 0;
 	Random random;
+	private static ContainerFactory instance;
 
+	public static ContainerFactory getInstance() {
+		if (instance == null) instance = new ContainerFactory();
+		return instance;
+	}
+
+	private ContainerFactory() {
+
+	}
 	public ContainerEntity createEntity() {
 		random = new Random();
 		return new ContainerEntity(String.valueOf(i++), random.nextInt(4) + 5, EventProvider.getDate());

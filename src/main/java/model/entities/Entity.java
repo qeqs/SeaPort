@@ -16,4 +16,6 @@ public interface Entity {
     int getColor();
 
     String getModel();
+
+    int getType();
 }
